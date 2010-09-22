@@ -1,3 +1,7 @@
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Calendar;
+
 public class Dato {
 		private int date;					//Klassens eneste attribut
 		
@@ -165,22 +169,56 @@ public class Dato {
 		
 		public boolean validate(){			//Returnerer true, hvis aktuel dato er valid
 											//ellers false. Fx 20060229 returnerer false.
-			boolean d = true;
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+			dateFormat.setLenient(false);
 			
-			return d;
+			String aDay = Integer.toString(getDay());
+			if (aDay.length() < 2) {
+				aDay = "0" + aDay;
+			}
+            
+			String aMonth = Integer.toString(getMonth());
+			if (aMonth.length() < 2) {
+				aMonth = "0" + aMonth;
+			}
+            
+			String aYear = Integer.toString(getYear());
+			if (aYear.length() < 2) {
+				aYear = "0" + aYear;
+			}
+            
+			if (aYear.length() < 3) {
+				aYear = "0" + aYear;
+			}
+            
+			if (aYear.length() < 4) {
+				aYear = "0" + aYear;
+			}
+			
+			try {
+				dateFormat.parse(aYear + aMonth + aDay);
+			} catch (ParseException pe) {
+				return false;
+			}
+			
+			return true;
 		}
 		
 		public int dayOfYear(){				//Returnerer aktuel dato i året. Fx 20060211
 											//returnerer 42.
-			int d = 10;
 			
-			return d;
+			Calendar aCal = Calendar.getInstance();
+			aCal.set(getYear(), getMonth() - 1, getDay());
+			
+			return aCal.get(Calendar.DAY_OF_YEAR);
 		}
 		
 		public int remainingDaysInYear(){	//Returnerer resterende antal dage i året.
 											//Fx 20060211 returnerer 323.
-			int d = 10;
-			
-			return d;
+			if (leapYear()) {
+				return 366 - dayOfYear();
+			} else {
+				return 365 - dayOfYear();
+			}
 		}
 }
