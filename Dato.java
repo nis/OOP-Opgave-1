@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Dato {
 		private int date;					//Klassens eneste attribut
@@ -9,6 +10,44 @@ public class Dato {
 		
 		public Dato(int aDate){				//Constructor med parameter
 			this.date = aDate;
+		}
+		
+		public void setNyDato (int d) {
+			if (d > 0) {
+				for (int i = 1; i <= d; i++) {
+					setDatoPlusEn();
+				}
+				//System.out.println("1Hep!");
+				return;
+			}
+			
+			if (d < 0) {
+				for (int i = -1; i >= d; i--) {
+					setDatoMinusEn();
+				}
+				//System.out.println("2Hep!");
+				return;
+			}
+		}
+		
+		public void setDatoPlusEn () {
+			Calendar c = Calendar.getInstance();
+			c.set(getYear(), getMonth() - 1, getDay());
+			c.add(Calendar.DATE, 1);
+			saveDate(c);
+		}
+		
+		public void setDatoMinusEn () {
+			Calendar c = Calendar.getInstance();
+			c.set(getYear(), getMonth() - 1, getDay());
+			c.add(Calendar.DATE, -1);
+			saveDate(c);
+		}
+		
+		public void saveDate(Calendar c) {
+			SimpleDateFormat f = new SimpleDateFormat("yyyyMMdd"); 
+			date = Integer.parseInt(f.format(c.getTime()), 10);
+			//System.out.println(f.format(c.getTime()));
 		}
 		
 		public int getDay(){				//Returnerer dagen
