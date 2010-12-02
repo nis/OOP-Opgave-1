@@ -12,6 +12,51 @@ public class Dato {
 			this.date = aDate;
 		}
 		
+		public String ugeDagTekst () {
+			switch (ugeDag()) {
+				case 1:  return "Mandag";
+				case 2:  return "Tirsdag";
+				case 3:  return "Onsdag";
+				case 4:  return "Torsdag";
+				case 5:  return "Fredag";
+				case 6:  return "Lørdag";
+				case 7:  return "Søndag";
+				default: return "Forkert uge dags nummer.";
+			}
+		}
+		
+		public int ugeDag () {
+			return ((new Dato(date).forskelIDage(new Dato(17000301))) % 7) + 1;
+		}
+		
+		public int forskelIDage (Dato d) {
+			Dato wD1 = new Dato(d.getDate());
+			Dato wD2 = new Dato(date);
+			int f = 0;
+			
+			if (wD1.getDate() == wD2.getDate()) {
+				return f;
+			}
+			
+			if (wD1.getDate() < wD2.getDate()) {
+				while (wD1.getDate() != wD2.getDate()) {
+					wD1.setDatoPlusEn();
+					f++;
+				}
+			} else {
+				while (wD2.getDate() != wD1.getDate()) {
+					wD2.setDatoPlusEn();
+					f++;
+				}
+			}
+			
+			return f;
+		}
+		
+		public int getDate () {
+			return date;
+		}
+		
 		public void setNyDato (int d) {
 			if (d > 0) {
 				for (int i = 1; i <= d; i++) {

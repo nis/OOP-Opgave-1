@@ -17,15 +17,32 @@ public class Main {
 		System.out.println("Dato: " + d.getDay() + "/" + d.getMonth() + "-" + d.getYear() );
 		
 		
-		System.out.println("\nLægger fem dage til datoen:");
-		d.setNyDato(5);
+		System.out.println("\nLægger 20 dage til datoen:");
+		d.setNyDato(20);
 		
 		System.out.println("Dato: " + d.getDay() + "/" + d.getMonth() + "-" + d.getYear() );
 		
-		System.out.println("\nTrækker fem dage fra datoen:");
-		d.setNyDato(-5);
+		System.out.println("\nTrækker 20 dage fra datoen:");
+		d.setNyDato(-20);
 		
 		System.out.println("Dato: " + d.getDay() + "/" + d.getMonth() + "-" + d.getYear() );
+		
+		System.out.println("\nTester forskellen i dage:");
+		System.out.println("Forskellen mellem den ovenstående og den samme: " + d.forskelIDage(d));
+		System.out.println("Forskellen mellem den ovenstående og 30/10-1978: " + d.forskelIDage(new Dato(19781030)));
+		System.out.println("Forskellen mellem den ovenstående og 10/10-1978: " + d.forskelIDage(new Dato(19781010)));
+		System.out.println("Forskellen mellem den ovenstående og 20/10-1979: " + d.forskelIDage(new Dato(19791020)));
+		
+		System.out.println("\nTester ugeDag():");
+		System.out.println("Ugedag for 20/10-1978: " + d.ugeDag());
+		System.out.println("Ugedag for 2/12-2010: " + new Dato(20101202).ugeDag());
+		
+		System.out.println("\nTester ugeDagTekst():");
+		System.out.println("Ugedag for 20/10-1978: " + d.ugeDagTekst());
+		System.out.println("Ugedag for 2/12-2010: " + new Dato(20101202).ugeDagTekst());
+		
+		// De resterende linjer tester funktionaliteten fra første portefølge opgave:
+		
 		// System.out.println("\nSætter datoen til: 25/5-0005");
 		// d.setDay(25);
 		// d.setMonth(5);
